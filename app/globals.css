@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --r3-accent: #ffc62b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast-lead {
+  animation: toast-slide-in 0.2s ease-out;
+}
+
+::selection {
+  background: #ffc62b;
+  color: #0d0d0d;
+}
+
+/* Admin panel theme — dark by default, overridden by [data-theme="light"]. */
+.admin-scope {
+  --admin-bg: #0d0d0d;
+  --admin-sidebar: #141414;
+  --admin-card: #1a1a1a;
+  --admin-active-nav: #1f1f1f;
+  --admin-input: #141414;
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-border-input: rgba(255, 255, 255, 0.14);
+  --admin-border-btn: rgba(255, 255, 255, 0.16);
+  --admin-divider: rgba(255, 255, 255, 0.06);
+  --admin-text: #ffffff;
+  --admin-text-secondary: #d8d8d8;
+  --admin-text-muted: #9ba0a3;
+  --admin-text-faint: #7a7a7a;
+  --admin-section-label: #565656;
+  --admin-disabled: #5a5a5a;
+  --admin-pill: #262626;
+  --admin-pill-text: #ffffff;
+  --admin-switch-off: #333333;
+  --admin-switch-thumb-off: #8a8a8a;
+  --admin-status-novo-bg: #2a2a2a;
+  --admin-status-novo-text: #d8d8d8;
+  color-scheme: dark;
+}
+
+.admin-scope[data-theme="light"] {
+  --admin-bg: #eeeeec;
+  --admin-sidebar: #ffffff;
+  --admin-card: #ffffff;
+  --admin-active-nav: #ececea;
+  --admin-input: #ffffff;
+  --admin-border: rgba(0, 0, 0, 0.14);
+  --admin-border-input: rgba(0, 0, 0, 0.24);
+  --admin-border-btn: rgba(0, 0, 0, 0.32);
+  --admin-divider: rgba(0, 0, 0, 0.1);
+  --admin-text: #0d0d0d;
+  --admin-text-secondary: #22262a;
+  --admin-text-muted: #4c5154;
+  --admin-text-faint: #71767a;
+  --admin-section-label: #8a8f92;
+  --admin-disabled: #c9c9c4;
+  --admin-pill: #e6e6e2;
+  --admin-pill-text: #0d0d0d;
+  --admin-switch-off: #cfcfc9;
+  --admin-switch-thumb-off: #ffffff;
+  --admin-status-novo-bg: #e6e6e2;
+  --admin-status-novo-text: #33373a;
+  color-scheme: light;
+}
+
+/* Native form control chrome should match the current admin theme */
+.admin-scope select,
+.admin-scope textarea,
+.admin-scope input {
+  color-scheme: inherit;
+}

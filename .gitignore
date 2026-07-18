@@ -36,3 +36,8 @@ next-env.d.ts
 # design reference files (not part of the app)
 /export/
 *.zip
+
+# claude code local config
+.claude/
+.vercel
+.env*

@@ -34,23 +34,21 @@ export async function finalizarCheckout(input: FinalizarCheckoutInput) {
   }
 
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("cotacoes")
-    .insert({
-      nome,
-      whatsapp: telefone.digitos,
-      email,
-      cidade: input.cidade || null,
-      tipo_espaco: input.tipo_espaco || null,
-      produtos: input.produtos,
-      origem_utm: input.origem_utm ?? null,
-    })
-    .select("id")
-    .single();
+  // Sem .select() após o insert: a RLS de cotacoes permite INSERT anônimo,
+  // mas SELECT é restrito a staff — ler o registro de volta falharia para visitantes.
+  const { error } = await supabase.from("cotacoes").insert({
+    nome,
+    whatsapp: telefone.digitos,
+    email,
+    cidade: input.cidade || null,
+    tipo_espaco: input.tipo_espaco || null,
+    produtos: input.produtos,
+    origem_utm: input.origem_utm ?? null,
+  });
 
   if (error) {
     return { ok: false as const, erro: "Não foi possível enviar sua solicitação. Tente novamente." };
   }
 
-  return { ok: true as const, cotacaoId: data.id };
+  return { ok: true as const };
 }

@@ -9,16 +9,6 @@ import { useCart } from "@/components/site/CartContext";
 import { finalizarCheckout } from "@/lib/actions/checkout";
 import { validarWhatsappBR } from "@/lib/validation";
 import { extractUtmParams } from "@/lib/utm";
-import { CidadeInput } from "@/components/CidadeInput";
-
-const TIPOS_ESPACO = [
-  "Academia",
-  "Studio",
-  "Condomínio",
-  "Residencial",
-  "Hotel",
-  "Outro",
-];
 
 export default function CarrinhoPage() {
   const router = useRouter();
@@ -65,9 +55,6 @@ export default function CarrinhoPage() {
     const resultado = await finalizarCheckout({
       nome: String(form.get("nome") ?? ""),
       whatsapp: String(form.get("whatsapp") ?? ""),
-      email: String(form.get("email") ?? ""),
-      cidade: String(form.get("cidade") ?? ""),
-      tipo_espaco: String(form.get("tipo_espaco") ?? ""),
       produtos: items.map((i) => ({
         produto_id: i.produto_id,
         nome: i.nome,
@@ -226,41 +213,6 @@ export default function CarrinhoPage() {
                   placeholder="(17) 99999-9999"
                   className="w-full border border-r3-borderMuted px-4 py-3.5 text-[15px] placeholder:text-r3-mutedDark focus:outline-none focus:border-r3-heading"
                 />
-              </div>
-
-              <div>
-                <label className="block text-[12px] font-semibold uppercase tracking-[.06em] text-r3-heading mb-2">
-                  E-mail *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full border border-r3-borderMuted px-4 py-3.5 text-[15px] focus:outline-none focus:border-r3-heading"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[12px] font-semibold uppercase tracking-[.06em] text-r3-heading mb-2">
-                  Cidade
-                </label>
-                <CidadeInput className="w-full border border-r3-borderMuted px-4 py-3.5 text-[15px] focus:outline-none focus:border-r3-heading" />
-              </div>
-
-              <div>
-                <label className="block text-[12px] font-semibold uppercase tracking-[.06em] text-r3-heading mb-2">
-                  Tipo de espaço
-                </label>
-                <select
-                  name="tipo_espaco"
-                  className="w-full border border-r3-borderMuted px-4 py-3.5 text-[15px] bg-white focus:outline-none focus:border-r3-heading"
-                >
-                  {TIPOS_ESPACO.map((tipo) => (
-                    <option key={tipo} value={tipo}>
-                      {tipo}
-                    </option>
-                  ))}
-                </select>
               </div>
 
               {/* Honeypot — humanos não veem nem preenchem */}

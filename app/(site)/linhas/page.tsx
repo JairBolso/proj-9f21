@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SmartImage } from "@/components/site/SmartImage";
+import { CtaFundo } from "@/components/site/CtaFundo";
 import { WhatsAppCTAButton } from "@/components/site/WhatsAppCTAButton";
 import { getLinhas } from "@/lib/data/linhas";
 import { getProdutosAtivos } from "@/lib/data/produtos";
@@ -118,8 +119,12 @@ export default async function LinhasPage() {
         );
       })}
 
-      <section className="bg-r3-black text-white text-center">
-        <div className="max-w-[720px] mx-auto px-6 py-20">
+      <section className="relative overflow-hidden bg-r3-black text-white text-center">
+        <CtaFundo
+          src={conteudo.cta_final_imagem}
+          srcMobile={conteudo.cta_final_imagem_mobile}
+        />
+        <div className="relative max-w-[720px] mx-auto px-6 py-20">
           <h2 className="font-oswald font-semibold uppercase text-[clamp(28px,4vw,42px)] leading-[1.05]">
             Ainda não sabe qual linha escolher?
           </h2>

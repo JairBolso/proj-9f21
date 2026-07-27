@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/site/ProductCard";
 import { CatalogFilters } from "@/components/site/CatalogFilters";
 import { WhatsAppCTAButton } from "@/components/site/WhatsAppCTAButton";
 import { SmartImage } from "@/components/site/SmartImage";
+import { CtaFundo } from "@/components/site/CtaFundo";
 import { getProdutosAtivos, getGruposDosProdutos } from "@/lib/data/produtos";
 import { getLinhas } from "@/lib/data/linhas";
 import { getCategorias } from "@/lib/data/categorias";
@@ -121,8 +122,12 @@ export default async function ProdutosPage({
         </div>
       </section>
 
-      <section className="bg-r3-black text-white text-center">
-        <div className="max-w-[720px] mx-auto px-6 py-20">
+      <section className="relative overflow-hidden bg-r3-black text-white text-center">
+        <CtaFundo
+          src={conteudo.cta_final_imagem}
+          srcMobile={conteudo.cta_final_imagem_mobile}
+        />
+        <div className="relative max-w-[720px] mx-auto px-6 py-20">
           <h2 className="font-oswald font-semibold uppercase text-[clamp(28px,4vw,42px)] leading-[1.05]">
             Não achou o que precisa?
           </h2>

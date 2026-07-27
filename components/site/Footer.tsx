@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Camera, Play } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
+import { InstagramIcon, YoutubeIcon } from "@/components/site/SocialIcons";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -18,8 +18,26 @@ const POLICIES = [
   { href: "/politicas/termos", label: "Termos de uso" },
 ];
 
-export function Footer() {
+const INSTAGRAM_PADRAO = "https://www.instagram.com/r3fitnessequipamentos/";
+const YOUTUBE_PADRAO = "https://www.youtube.com/@R3Fitness";
+
+export function Footer({
+  instagramUrl,
+  youtubeUrl,
+}: {
+  instagramUrl?: string | null;
+  youtubeUrl?: string | null;
+}) {
   const year = new Date().getFullYear();
+
+  const redes = [
+    {
+      label: "Instagram",
+      href: instagramUrl || INSTAGRAM_PADRAO,
+      Icon: InstagramIcon,
+    },
+    { label: "YouTube", href: youtubeUrl || YOUTUBE_PADRAO, Icon: YoutubeIcon },
+  ];
 
   return (
     <footer className="bg-r3-footer border-t border-r3-divider">
@@ -81,20 +99,19 @@ export function Footer() {
             <li>Seg a sex, 8h às 17h</li>
           </ul>
           <div className="flex gap-3 mt-5">
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="w-9 h-9 flex items-center justify-center border border-r3-divider text-r3-mutedDark hover:text-accent hover:border-accent transition-colors"
-            >
-              <Camera size={16} strokeWidth={1.8} />
-            </a>
-            <a
-              href="#"
-              aria-label="YouTube"
-              className="w-9 h-9 flex items-center justify-center border border-r3-divider text-r3-mutedDark hover:text-accent hover:border-accent transition-colors"
-            >
-              <Play size={16} strokeWidth={1.8} />
-            </a>
+            {redes.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                title={label}
+                className="w-9 h-9 flex items-center justify-center border border-r3-divider text-r3-mutedDark hover:text-accent hover:border-accent transition-colors"
+              >
+                <Icon size={17} />
+              </a>
+            ))}
           </div>
         </div>
       </div>

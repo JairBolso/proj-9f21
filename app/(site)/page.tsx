@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Truck, ShieldCheck, CreditCard, Headset } from "lucide-react";
 import { SmartImage } from "@/components/site/SmartImage";
+import { CtaFundo } from "@/components/site/CtaFundo";
 import { ProductCard } from "@/components/site/ProductCard";
 import { WhatsAppCTAButton } from "@/components/site/WhatsAppCTAButton";
 import { getCategoriasHome } from "@/lib/data/categorias";
@@ -188,25 +189,32 @@ export default async function HomePage() {
             </h2>
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {linhas.map((linha) => (
-                <div
+                <Link
                   key={linha.id}
-                  className="flex flex-col bg-r3-card border border-r3-cardBorder p-6"
+                  href={`/linhas#${linha.slug}`}
+                  className="group flex flex-col bg-r3-card border border-r3-cardBorder hover:border-accent transition-colors"
                 >
-                  <h3 className="font-oswald font-semibold text-[22px] uppercase">
-                    {linha.nome}
-                  </h3>
-                  {linha.descricao && (
-                    <p className="mt-3 text-[14px] leading-relaxed text-r3-mutedDark flex-1">
-                      {linha.descricao}
-                    </p>
-                  )}
-                  <Link
-                    href={`/linhas#${linha.slug}`}
-                    className="mt-6 text-[13px] font-semibold uppercase tracking-[.08em] text-accent hover:underline"
-                  >
-                    Conhecer linha →
-                  </Link>
-                </div>
+                  <SmartImage
+                    src={linha.imagem_url}
+                    alt={`Equipamentos da linha ${linha.nome}`}
+                    label={`Foto da linha ${linha.nome}`}
+                    dark
+                    className="aspect-[4/3]"
+                  />
+                  <div className="flex flex-col flex-1 p-6">
+                    <h3 className="font-oswald font-semibold text-[22px] uppercase">
+                      {linha.nome}
+                    </h3>
+                    {linha.descricao && (
+                      <p className="mt-3 text-[14px] leading-relaxed text-r3-mutedDark flex-1">
+                        {linha.descricao}
+                      </p>
+                    )}
+                    <span className="mt-6 text-[13px] font-semibold uppercase tracking-[.08em] text-accent group-hover:underline">
+                      Conhecer linha →
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -343,8 +351,12 @@ export default async function HomePage() {
       )}
 
       {/* CTA final */}
-      <section className="bg-r3-black text-white text-center">
-        <div className="max-w-[720px] mx-auto px-6 py-24">
+      <section className="relative overflow-hidden bg-r3-black text-white text-center">
+        <CtaFundo
+          src={conteudo.cta_final_imagem}
+          srcMobile={conteudo.cta_final_imagem_mobile}
+        />
+        <div className="relative max-w-[720px] mx-auto px-6 py-24">
           <h2 className="font-oswald font-semibold uppercase text-[clamp(30px,4.4vw,48px)] leading-[1.05]">
             Pronto para equipar sua academia?
           </h2>

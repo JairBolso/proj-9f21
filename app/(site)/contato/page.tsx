@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { ContatoForm } from "@/components/site/ContatoForm";
+import { SmartImage } from "@/components/site/SmartImage";
 import { buildWhatsAppLink, defaultWhatsAppNumber } from "@/lib/whatsapp";
+import { getConteudoSiteMap } from "@/lib/data/conteudo";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -16,7 +18,9 @@ const BENEFICIOS = [
   "Condições especiais para projetos completos",
 ];
 
-export default function ContatoPage() {
+export default async function ContatoPage() {
+  const conteudo = await getConteudoSiteMap();
+
   const waLink = buildWhatsAppLink(
     defaultWhatsAppNumber(),
     "Olá! Gostaria de falar com a R3 Fitness.",
@@ -24,8 +28,21 @@ export default function ContatoPage() {
 
   return (
     <>
-      <section className="bg-r3-black text-white">
-        <div className="max-w-[1280px] mx-auto px-6 py-16 sm:py-20">
+      <section className="relative bg-r3-black text-white overflow-hidden">
+        {conteudo.hero_contato_imagem && (
+          <>
+            <SmartImage
+              src={conteudo.hero_contato_imagem}
+              srcMobile={conteudo.hero_contato_imagem_mobile}
+              alt="Equipe R3 Fitness em atendimento"
+              label="Banner da página de contato"
+              dark
+              className="absolute inset-0 opacity-30"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-r3-black via-r3-black/85 to-r3-black/50" />
+          </>
+        )}
+        <div className="relative max-w-[1280px] mx-auto px-6 py-16 sm:py-20">
           <h1 className="font-oswald font-bold uppercase text-[clamp(32px,5vw,54px)] leading-[1.02] max-w-[18ch]">
             Receba um projeto sob medida
           </h1>

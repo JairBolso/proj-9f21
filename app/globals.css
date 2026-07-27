@@ -25,6 +25,53 @@ html {
   animation: toast-slide-in 0.2s ease-out;
 }
 
+/* Botão "Atualizado" do Conteúdo do Site. */
+@keyframes salvo-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  55% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.salvo-pop {
+  animation: salvo-pop 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .salvo-pop {
+    animation: none;
+  }
+}
+
+/* Faixa amarela do topo: cada selo sobe deslizando ao entrar. */
+@keyframes topbar-selo-in {
+  from {
+    opacity: 0;
+    transform: translateY(115%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.topbar-selo {
+  animation: topbar-selo-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar-selo {
+    animation: none;
+  }
+}
+
 ::selection {
   background: #ffc62b;
   color: #0d0d0d;

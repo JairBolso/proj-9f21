@@ -17,7 +17,11 @@ export function buildMensagemContato(params: {
     ? [
         "Recebemos sua solicitação de orçamento para os seguintes equipamentos:",
         "",
-        ...produtos.map((p) => `• ${p.nome}${p.qtd > 1 ? ` (qtd ${p.qtd})` : ""}`),
+        ...produtos.map((p) => {
+          const linha = p.linha ? ` (${p.linha})` : "";
+          const qtd = p.qtd > 1 ? ` — qtd ${p.qtd}` : "";
+          return `• ${p.nome}${linha}${qtd}`;
+        }),
       ]
     : ["Recebemos sua solicitação de orçamento com a R3 Fitness."];
 

@@ -3,7 +3,12 @@ import { ShieldAlert } from "lucide-react";
 
 export default function Admin403Page() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-admin-bg text-white font-inter px-6">
+    // admin-scope define as variáveis --admin-*; sem ele o fundo e o texto
+    // ficam ambos brancos.
+    <div
+      data-theme="dark"
+      className="admin-scope min-h-screen flex items-center justify-center bg-admin-bg text-admin-text font-inter px-6"
+    >
       <div className="max-w-[440px] text-center">
         <ShieldAlert
           size={40}

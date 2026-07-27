@@ -7,7 +7,9 @@ import type { ProdutoCotado } from "@/lib/supabase/database.types";
 export interface FinalizarCheckoutInput {
   nome: string;
   whatsapp: string;
-  email: string;
+  // O formulário público pede só nome e WhatsApp; os campos abaixo continuam
+  // aceitos para cotações criadas por outros caminhos.
+  email?: string;
   cidade?: string;
   tipo_espaco?: string;
   produtos: ProdutoCotado[];
@@ -17,16 +19,16 @@ export interface FinalizarCheckoutInput {
 export async function finalizarCheckout(input: FinalizarCheckoutInput) {
   const nome = input.nome.trim();
   const whatsapp = input.whatsapp.trim();
-  const email = input.email.trim();
+  const email = input.email?.trim() ?? "";
 
-  if (!nome || !whatsapp || !email) {
-    return { ok: false as const, erro: "Nome, WhatsApp e e-mail são obrigatórios." };
+  if (!nome || !whatsapp) {
+    return { ok: false as const, erro: "Nome e WhatsApp são obrigatórios." };
   }
   const telefone = validarWhatsappBR(whatsapp);
   if (!telefone.valido) {
     return { ok: false as const, erro: telefone.erro ?? "WhatsApp inválido." };
   }
-  if (!/^\S+@\S+\.\S+$/.test(email)) {
+  if (email && !/^\S+@\S+\.\S+$/.test(email)) {
     return { ok: false as const, erro: "Informe um e-mail válido." };
   }
   if (input.produtos.length === 0) {
@@ -39,7 +41,7 @@ export async function finalizarCheckout(input: FinalizarCheckoutInput) {
   const { error } = await supabase.from("cotacoes").insert({
     nome,
     whatsapp: telefone.digitos,
-    email,
+    email: email || null,
     cidade: input.cidade || null,
     tipo_espaco: input.tipo_espaco || null,
     produtos: input.produtos,

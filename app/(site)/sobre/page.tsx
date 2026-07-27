@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SmartImage } from "@/components/site/SmartImage";
+import { CtaFundo } from "@/components/site/CtaFundo";
 import { WhatsAppCTAButton } from "@/components/site/WhatsAppCTAButton";
 import { getConteudoSiteMap } from "@/lib/data/conteudo";
 import { Weight, Factory, HeartHandshake, MapPinned } from "lucide-react";
@@ -24,11 +25,13 @@ const VALORES = [
   { icon: MapPinned, titulo: "Brasil inteiro", descricao: "Entrega e montagem em qualquer estado, com equipe própria." },
 ];
 
+// Nome e função de cada pessoa são editáveis em Conteúdo do Site; os valores
+// abaixo só entram se a chave estiver vazia no banco.
 const EQUIPE = [
-  { chave: "sobre_equipe_1_imagem", nome: "Ricardo Alves", cargo: "Diretor de Fábrica" },
-  { chave: "sobre_equipe_2_imagem", nome: "Renata Souza", cargo: "Engenharia de Produto" },
-  { chave: "sobre_equipe_3_imagem", nome: "Rafael Torres", cargo: "Coordenação Comercial" },
-  { chave: "sobre_equipe_4_imagem", nome: "Camila Duarte", cargo: "Suporte Técnico" },
+  { indice: 1, nome: "Ricardo Alves", cargo: "Diretor de Fábrica" },
+  { indice: 2, nome: "Renata Souza", cargo: "Engenharia de Produto" },
+  { indice: 3, nome: "Rafael Torres", cargo: "Coordenação Comercial" },
+  { indice: 4, nome: "Camila Duarte", cargo: "Suporte Técnico" },
 ];
 
 export default async function SobrePage() {
@@ -136,26 +139,37 @@ export default async function SobrePage() {
             Equipe
           </h2>
           <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {EQUIPE.map((pessoa) => (
-              <div key={pessoa.nome}>
-                <SmartImage
-                  src={conteudo[pessoa.chave]}
-                  alt={pessoa.nome}
-                  label={pessoa.nome}
-                  className="aspect-square"
-                />
-                <h3 className="mt-3 font-barlow font-semibold text-[15px] text-r3-heading">
-                  {pessoa.nome}
-                </h3>
-                <p className="text-[13px] text-r3-muted">{pessoa.cargo}</p>
-              </div>
-            ))}
+            {EQUIPE.map((pessoa) => {
+              const nome =
+                conteudo[`sobre_equipe_${pessoa.indice}_nome`] || pessoa.nome;
+              const cargo =
+                conteudo[`sobre_equipe_${pessoa.indice}_cargo`] || pessoa.cargo;
+
+              return (
+                <div key={pessoa.indice}>
+                  <SmartImage
+                    src={conteudo[`sobre_equipe_${pessoa.indice}_imagem`]}
+                    alt={nome}
+                    label={nome}
+                    className="aspect-square"
+                  />
+                  <h3 className="mt-3 font-barlow font-semibold text-[15px] text-r3-heading">
+                    {nome}
+                  </h3>
+                  <p className="text-[13px] text-r3-muted">{cargo}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="bg-r3-black text-white text-center">
-        <div className="max-w-[720px] mx-auto px-6 py-20">
+      <section className="relative overflow-hidden bg-r3-black text-white text-center">
+        <CtaFundo
+          src={conteudo.cta_final_imagem}
+          srcMobile={conteudo.cta_final_imagem_mobile}
+        />
+        <div className="relative max-w-[720px] mx-auto px-6 py-20">
           <h2 className="font-oswald font-semibold uppercase text-[clamp(28px,4vw,42px)] leading-[1.05]">
             Quer conhecer a R3 de perto?
           </h2>

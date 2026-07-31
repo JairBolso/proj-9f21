@@ -67,6 +67,7 @@ export function LinhaForm({ linha }: LinhaFormProps) {
           bucket="site"
           folder="linhas"
           aspectClassName="aspect-[4/3]"
+          helperText="1200 × 900px (proporção 4:3)"
         />
       </div>
 

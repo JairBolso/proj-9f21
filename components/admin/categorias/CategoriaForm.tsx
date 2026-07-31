@@ -65,7 +65,8 @@ export function CategoriaForm({ categoria }: CategoriaFormProps) {
           onChange={setImagemUrl}
           bucket="site"
           folder="categorias"
-          aspectClassName="aspect-[4/3]"
+          aspectClassName="aspect-[4/5]"
+          helperText="900 × 1125px (proporção 4:5)"
         />
       </div>
 

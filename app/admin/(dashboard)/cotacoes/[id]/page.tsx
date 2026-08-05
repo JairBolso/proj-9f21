@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getCotacaoById, getVendedores } from "@/lib/data/cotacoes";
 import { formatDateTime, formatBRL } from "@/lib/format";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { UTM_LABELS } from "@/lib/utm";
 import { getCurrentUsuario } from "@/lib/auth";
 import { usuarioAtualPodeExecutarAcao } from "@/lib/data/permissoes";
 import { StatusCard } from "@/components/admin/cotacoes/StatusCard";
@@ -201,7 +202,9 @@ export default async function CotacaoDetailPage({
               </div>
               {Object.entries(cotacao.origem_utm ?? {}).map(([key, value]) => (
                 <div key={key} className="flex justify-between gap-3">
-                  <dt className="text-admin-textMuted">{key}</dt>
+                  <dt className="text-admin-textMuted">
+                    {UTM_LABELS[key] ?? key}
+                  </dt>
                   <dd className="text-admin-textSecondary truncate">{value}</dd>
                 </div>
               ))}

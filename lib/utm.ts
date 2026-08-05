@@ -4,7 +4,17 @@ const UTM_KEYS = [
   "utm_campaign",
   "utm_term",
   "utm_content",
+  "utm_matchtype",
 ] as const;
+
+export const UTM_LABELS: Record<string, string> = {
+  utm_source: "Origem",
+  utm_medium: "Mídia",
+  utm_campaign: "Campanha",
+  utm_term: "Termo buscado",
+  utm_content: "Anúncio",
+  utm_matchtype: "Tipo de correspondência",
+};
 
 export function extractUtmParams(
   searchParams: URLSearchParams,

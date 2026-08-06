@@ -34,7 +34,11 @@ export default function ObrigadoPage() {
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-          <WhatsAppCTAButton mensagem="Olá! Acabei de solicitar um orçamento pelo site da R3 Fitness.">
+          <WhatsAppCTAButton
+            variant="whatsapp"
+            className="px-10 py-4 text-[14px]"
+            mensagem="Olá! Acabei de solicitar um orçamento pelo site da R3 Fitness."
+          >
             Falar no WhatsApp agora
           </WhatsAppCTAButton>
           <Link

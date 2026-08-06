@@ -11,6 +11,8 @@ const VARIANTS = {
   outline:
     "border border-white/55 text-white hover:border-accent hover:text-accent",
   dark: "bg-r3-dark2 text-white hover:bg-accent hover:text-r3-black",
+  whatsapp:
+    "bg-r3-whatsapp text-white hover:brightness-90 border border-transparent shadow-lg",
 };
 
 interface WhatsAppCTAButtonProps {
